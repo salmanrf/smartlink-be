@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "colName": "Smartlink",
+    "created": "2022-09-16T14:30:08.990Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "049fde38-8262-4a48-b74a-bf27503709f0",
+        "name": "Auth",
+        "containerId": "",
+        "created": "2022-09-16T14:30:13.430Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "3ecd039e-5a90-4f65-8124-80f179820edb",
+        "name": "Service",
+        "containerId": "",
+        "created": "2022-09-17T06:24:54.042Z",
+        "sortNum": 20000
+      }
+    ]
+  }
+]

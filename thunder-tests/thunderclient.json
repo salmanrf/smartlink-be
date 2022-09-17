@@ -1,0 +1,110 @@
+[
+  {
+    "_id": "61737ba9-d21a-4cdd-964c-926772c4fe23",
+    "colId": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "containerId": "049fde38-8262-4a48-b74a-bf27503709f0",
+    "name": "Register",
+    "url": "localhost:8888/register",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-09-16T14:30:22.052Z",
+    "modified": "2022-09-17T03:23:15.579Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"Nortnb\",\n  \"name\": \"Nortnb\",\n  \"phone\": \"08979253935\",\n  \"password\": \"forbiddensun123\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "0e181354-7995-43d9-b5dd-652aa6310693",
+    "colId": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "containerId": "3ecd039e-5a90-4f65-8124-80f179820edb",
+    "name": "Create Service",
+    "url": "localhost:8888/layanan",
+    "method": "POST",
+    "sortNum": 15000,
+    "created": "2022-09-17T03:21:58.766Z",
+    "modified": "2022-09-17T07:33:18.284Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Cuci Basah + Setrika\",\n  \"unit\": \"kg\",\n  \"price\": \"10000\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "ba616fa4-c656-4776-a606-318aecc3544a",
+    "colId": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "containerId": "049fde38-8262-4a48-b74a-bf27503709f0",
+    "name": "Login",
+    "url": "localhost:8888/login",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-09-17T06:24:54.044Z",
+    "modified": "2022-09-17T06:33:25.274Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"Nortnb\",\n  \"password\": \"forbiddensun123\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "bb407cd5-be6e-4de9-ba65-296f0ac9337b",
+    "colId": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "containerId": "049fde38-8262-4a48-b74a-bf27503709f0",
+    "name": "Self",
+    "url": "localhost:8888/self",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-09-17T06:56:54.920Z",
+    "modified": "2022-09-17T06:57:14.083Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "155f1982-6b3c-46a6-b78a-0744ea376b16",
+    "colId": "553d50fc-39fb-484a-8b8b-34b99e720315",
+    "containerId": "3ecd039e-5a90-4f65-8124-80f179820edb",
+    "name": "Find Service",
+    "url": "localhost:8888/layanan?page_number=2&page_size=1",
+    "method": "GET",
+    "sortNum": 25000,
+    "created": "2022-09-17T08:05:27.497Z",
+    "modified": "2022-09-17T12:40:58.748Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page_number",
+        "value": "2",
+        "isPath": false
+      },
+      {
+        "name": "page_size",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  }
+]
