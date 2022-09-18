@@ -1,4 +1,5 @@
 import {
+  AfterLoad,
   Check,
   Column,
   CreateDateColumn,
@@ -11,9 +12,6 @@ import {
 export class User {
   @PrimaryColumn('uuid')
   uuid: string;
-
-  @Column({ type: 'varchar', length: 36 })
-  uuid_txt: string;
 
   @Column({ type: 'varchar', length: 50, nullable: false })
   full_name: string;

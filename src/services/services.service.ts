@@ -7,9 +7,10 @@ import {
 } from 'src/common/utils/pagination.utils';
 import { Repository } from 'typeorm';
 import { CreateServiceDto } from './dto/create-service.dto';
-import { FindServiceDto } from './dto/find-service.dt';
+import { FindServiceDto } from './dto/find-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { Service } from './entities/service.entity';
+import { FindServiceModel } from './model/find-service.model';
 
 @Injectable()
 export class ServicesService {
@@ -18,15 +19,23 @@ export class ServicesService {
 
   async create(createServiceDto: CreateServiceDto) {
     try {
-      const newService = await this.serviceRepo.save(createServiceDto);
+      const { price, ...createInput } = createServiceDto;
 
-      return newService;
+      const newService = await this.serviceRepo.save(
+        {
+          ...createInput,
+          price: +price,
+        },
+        { reload: false },
+      );
+
+      return newService as Service;
     } catch (error) {
       throw error;
     }
   }
 
-  async findAll(dto: FindServiceDto): Promise<PaginationModel<Service>> {
+  async findAll(dto: FindServiceDto): Promise<FindServiceModel> {
     try {
       const { name, unit, page_number, page_size } = dto;
       let { sort_field, sort_order } = dto;
@@ -35,7 +44,7 @@ export class ServicesService {
       const { limit, offset } = getPaginationParams(+page_number, +page_size);
 
       if (name) {
-        sqb.andWhere("name ILIKE '%:name%'", { name });
+        sqb.andWhere('name LIKE :name', { name: `%${name}%` });
       }
       if (unit) {
         sqb.andWhere({ unit });

@@ -24,11 +24,11 @@ export class AuthService {
 
       const existing = await this.userService.findOne({ username } as User);
 
-      const hash = await bcrypt.hash(password, 11);
-
       if (existing) {
         throw new BadRequestException('User already exists.');
       }
+
+      const hash = await bcrypt.hash(password, 11);
 
       const newUser = await this.userService.create({
         username,
@@ -64,9 +64,9 @@ export class AuthService {
       const [jwt, error] = await promiseTuplify<string>(
         jwtSign({
           username,
+          id: user.uuid,
           session_id: session_uuid,
           name: user.full_name,
-          id: user.uuid_txt,
         }),
       );
 
@@ -77,7 +77,7 @@ export class AuthService {
       await this.userService.update(user.uuid, { session_uuid });
 
       const data: LoginModel = {
-        id: user.uuid_txt,
+        id: user.uuid,
         username: user.username,
         name: user.full_name,
         token: jwt,

@@ -1,22 +1,48 @@
-import { Controller, Get, Post, Body, UseGuards, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
-import { ApiResponse } from 'src/common/models/api-response.model';
-import { Service } from './entities/service.entity';
 import { JwtGuard } from 'src/guards/JwtGuard.guard';
-import { FindServiceDto } from './dto/find-service.dt';
-import { PaginationModel } from 'src/common/models/pagination.model';
+import { FindServiceDto } from './dto/find-service.dto';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CreateServiceResponse } from './model/create-service.model';
+import { FindServiceResponse } from './model/find-service.model';
+import { AuthorizedRequest } from 'src/auth/dto/authorized-request.dto';
 
 @Controller('layanan')
+@ApiTags('layanan')
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
 
   @Post()
   @UseGuards(JwtGuard)
-  async create(@Body() createServiceDto: CreateServiceDto) {
+  @ApiBearerAuth()
+  @ApiOperation({ description: 'Create New Service.' })
+  @ApiCreatedResponse({
+    description: 'Service has been created successfully.',
+    type: CreateServiceResponse,
+  })
+  async create(
+    @Req() req: AuthorizedRequest,
+    @Body() createServiceDto: CreateServiceDto,
+  ) {
+    createServiceDto.user_uuid = req.user.id;
+
     const result = await this.servicesService.create(createServiceDto);
 
-    const response: ApiResponse<Service> = {
+    const response: CreateServiceResponse = {
       code: 201,
       status: 'Success',
       message: 'Service Created Successfully',
@@ -31,7 +57,7 @@ export class ServicesController {
     try {
       const result = await this.servicesService.findAll(dto);
 
-      const response: ApiResponse<PaginationModel<Service>> = {
+      const response: FindServiceResponse = {
         code: 200,
         status: 'Success',
         message: 'Find Services success.',

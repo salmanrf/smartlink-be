@@ -1,4 +1,10 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { LoginModel } from 'src/auth/models/login.model';
 import { jwtVerify } from 'src/common/utils/jwt.utils';
 import { promiseTuplify } from 'src/common/utils/promise.utils';
@@ -18,12 +24,14 @@ export class JwtGuard implements CanActivate {
       return false;
     }
 
+    console.log('headers', headers);
+
     const token = authorization.split(' ').pop();
 
     const [decoded, error] = await promiseTuplify(jwtVerify(token));
 
     if (error) {
-      return false;
+      throw new UnauthorizedException(error);
     }
 
     const uuid = decoded.payload['id'];

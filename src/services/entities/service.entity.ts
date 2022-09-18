@@ -10,17 +10,11 @@ import {
 
 @Entity('services')
 export class Service {
-  @AfterLoad()
-  humanizeUuuid() {
-    this.uuid = this.uuid_txt;
-    delete this.uuid_txt;
-  }
-
   @PrimaryColumn('uuid')
   uuid: string;
 
-  @Column({ type: 'uuid' })
-  uuid_txt: string;
+  @Column({ type: 'uuid', nullable: false })
+  user_uuid: string;
 
   @Column({ type: 'varchar', length: 50, nullable: false })
   name: string;

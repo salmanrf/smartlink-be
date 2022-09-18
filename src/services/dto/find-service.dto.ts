@@ -4,9 +4,9 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 export class FindServiceDto extends PaginationDto {
   @IsString()
   @IsOptional()
-  name: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
-  unit: string;
+  unit?: string;
 }
